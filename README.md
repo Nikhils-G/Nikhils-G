@@ -9,12 +9,12 @@ Ecological Balance: I contribute to environmental sustainability by participatin
 
 📜 Certifications
 
-Google Analytics
-Google AI and Machine Learning
-AWS Cloud Computing
-AICTE Network Security Associate Cyber Security
-Cisco Networking Academy Cyber Security
-Yhills Internship Completion from E-cell IIT Hyderabad
+Google Analytics ,
+Google AI and Machine Learning ,
+AWS Cloud Computing ,
+AICTE Network Security Associate Cyber Security ,
+Cisco Networking Academy Cyber Security ,
+Yhills Internship Completion from E-cell IIT Hyderabad .
 🏅 Awards and Clubs
 Best Project from Ceer 🏆
 
@@ -33,7 +33,7 @@ Data Visualization 📊
 
 🗣 Language
 
-Proficiency: Fluent in Verbal and Written English 🌐
+Proficiency: Fluent in Verbal and Written English 🌐 !!
 
 💡 Qualities
 
