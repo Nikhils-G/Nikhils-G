@@ -15,7 +15,9 @@ AWS Cloud Computing ,
 AICTE Network Security Associate Cyber Security ,
 Cisco Networking Academy Cyber Security ,
 Yhills Internship Completion from E-cell IIT Hyderabad .
+
 🏅 Awards and Clubs
+
 Best Project from Ceer 🏆
 
 🛠 Skills
