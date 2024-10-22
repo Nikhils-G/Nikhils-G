@@ -1,4 +1,4 @@
-# Nikhil Sukthe 👨‍💻
+# Nikhil Sukthe 
 
 ### Welcome to my GitHub profile! I'm Nikhil Sukthe, a passionate Computer Science and Engineering graduate with a keen interest in Artificial Intelligence and Data Science. 🚀
 
