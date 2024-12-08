@@ -1,3 +1,3 @@
 # Nikhil Sukthe 
 
-[MyWebSite-²8](https://nikhilsukthe.netlify.app/)
+[MyWebSite-²8](https://nikhilsukthe.vercel.app/)
