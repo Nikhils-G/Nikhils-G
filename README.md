@@ -1,27 +1,23 @@
-
-```markdown
 <div align="center">
 
-```ascii
-        ███╗   ██╗██╗  ██╗██╗██╗     ███████╗ ██████╗ ██╗  ██╗███████╗
-        ████╗  ██║██║ ██╔╝██║██║     ██╔════╝██╔════╝ ██║  ██║██╔════╝
-        ██╔██╗ ██║█████╔╝ ██║██║     █████╗  ██║  ███╗███████╗███████╗
-        ██║╚██╗██║██╔═██╗ ██║██║     ██╔══╝  ██║   ██║██╔══██║╚════██║
-        ██║ ╚████║██║  ██╗██║███████╗███████╗╚██████╔╝██║  ██║███████║
-        ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
-```
+# ⚡ **Nikhil Sukthe** ⚡  
 
-🌀 **Welcome to Nikhil Sukthe's Digital Space** 🌀  
-
-🌐 **[🌍 Explore My Website](https://nikhilsukthe.vercel.app/)**  
-🎨 Crafted with passion for **cloud architecture** ☁️ and **AI innovation** 🤖  
-
-[![GitHub Followers](https://img.shields.io/github/followers/nikhilsukthe?style=for-the-badge&color=blueviolet)](https://github.com/nikhilsukthe)  
-[![Website Status](https://img.shields.io/website?down_message=Offline&style=for-the-badge&up_message=Live&url=https%3A%2F%2Fnikhilsukthe.vercel.app)](https://nikhilsukthe.vercel.app/)
+🌐 [**Visit My Digital Space**](https://nikhilsukthe.vercel.app/) 🌟  
 
 ---
 
-_"Turning ideas into scalable solutions and redefining the future of cloud computing."_  
-</div>
-```  
+<p align="center">
+  <img src="https://raw.githubusercontent.com/NikhilSukthe/assets/main/banner.png" alt="Banner" width="800">
+</p>
 
+---
+
+### 💡 _“Turning ideas into scalable solutions and redefining the future of cloud computing."_ 💻☁️  
+
+🔗 **Explore more**:  
+[![Website](https://img.shields.io/badge/Website-LIVE-00C853?style=for-the-badge&logo=vercel&logoColor=white)](https://nikhilsukthe.vercel.app/)  
+[![GitHub](https://img.shields.io/badge/GitHub-Nikhil's_Profile-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Nikhils-G)  
+
+---
+
+</div>
