@@ -1,18 +1,27 @@
+
+```markdown
 <div align="center">
 
-# ✨ **Nikhil Sukthe** ✨  
+```ascii
+        ███╗   ██╗██╗  ██╗██╗██╗     ███████╗ ██████╗ ██╗  ██╗███████╗
+        ████╗  ██║██║ ██╔╝██║██║     ██╔════╝██╔════╝ ██║  ██║██╔════╝
+        ██╔██╗ ██║█████╔╝ ██║██║     █████╗  ██║  ███╗███████╗███████╗
+        ██║╚██╗██║██╔═██╗ ██║██║     ██╔══╝  ██║   ██║██╔══██║╚════██║
+        ██║ ╚████║██║  ██╗██║███████╗███████╗╚██████╔╝██║  ██║███████║
+        ╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝
+```
 
-🌐 **[Discover My World](https://nikhilsukthe.vercel.app/)**  
+🌀 **Welcome to Nikhil Sukthe's Digital Space** 🌀  
+
+🌐 **[🌍 Explore My Website](https://nikhilsukthe.vercel.app/)**  
+🎨 Crafted with passion for **cloud architecture** ☁️ and **AI innovation** 🤖  
+
+[![GitHub Followers](https://img.shields.io/github/followers/nikhilsukthe?style=for-the-badge&color=blueviolet)](https://github.com/nikhilsukthe)  
+[![Website Status](https://img.shields.io/website?down_message=Offline&style=for-the-badge&up_message=Live&url=https%3A%2F%2Fnikhilsukthe.vercel.app)](https://nikhilsukthe.vercel.app/)
 
 ---
 
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/89832006/221408427-059a7f4c-30a6-4c17-832d-e37cc930f6ab.gif" alt="banner" width="600"/>
-</p>
-
----
-
-🎯 _Building the future with **clouds** and **code**_ ☁️⚙️  
-🔗 _Click the link above to explore more!_
-
+_"Turning ideas into scalable solutions and redefining the future of cloud computing."_  
 </div>
+```  
+
