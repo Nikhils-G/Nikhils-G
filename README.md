@@ -6,6 +6,7 @@
 
 
  ![🦋](https://komarev.com/ghpvc/?username=Nikhils-G)
+![Profile Views](https://img.shields.io/badge/Profile%20Views-571-blue?style=for-the-badge&logo=eye)
 
 
 <img src="https://i.imgur.com/your-gif.gif" width="150px">
