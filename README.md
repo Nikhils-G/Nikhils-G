@@ -32,21 +32,9 @@ A race condition in the Sarvam STT plugin: agent responses longer than ~10 s tri
 
 More on [nikhilsukthe.vercel.app](https://nikhilsukthe.vercel.app/).
 
-### One agent runtime, every channel
+### One runtime, every channel
 
-```mermaid
-%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#2e1f54", "primaryTextColor": "#ece7f4", "primaryBorderColor": "#a78bfa", "lineColor": "#f0a63a", "fontFamily": "monospace", "fontSize": "14px"}}}%%
-flowchart LR
-    P["Phone · PSTN / SIP"] --> R["Agent runtime — LiveKit · STT ⇄ TTS"]
-    W["WhatsApp"] --> R
-    C["Chat · Email"] --> R
-    R --> L["LLM · tools · RAG · memory"]
-    L --> O["Outcomes — payments · bookings · collections · support"]
-```
-
-### Stack
-
-<img src="assets/stack.svg" width="800" alt="Stack — voice: LiveKit, SIP/WebRTC, STT/TTS, Gemini Live · agents: LangGraph, LangChain, MCP, RAG, LoRA/QLoRA · backend: Python, FastAPI, WebSockets, MongoDB, Redis, PostgreSQL · infra: Docker, Kubernetes, AWS, GCP Vertex, Langfuse · data: PyTorch, Pinecone, FAISS, ChromaDB">
+<img src="assets/stack.svg" width="800" alt="Nikhil's stack drawn as a circuit board: Phone/SIP, WhatsApp and Chat/Email inputs flow into an Agent Runtime chip (LiveKit, WebRTC, SIP, STT and TTS, Gemini Live, Sarvam) wired to an LLM Core chip (LangGraph, MCP, RAG, LoRA/QLoRA), mounted on an infra bus of FastAPI/WebSockets, MongoDB/Redis/Postgres, Docker/Kubernetes, AWS/GCP Vertex, Langfuse, and vector databases">
 
 ### Live stats
 
