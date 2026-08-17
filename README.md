@@ -1,23 +1,73 @@
 <div align="center">
 
-#   𝑵𝒊𝒌𝒉𝒊𝒍 𝑺𝒖𝒌𝒕𝒉𝒆   
+<img src="assets/header.svg" width="800" alt="nikhil@ai-agents:~$ whoami — Nikhil Sukthe, AI Engineer, building agents that automate business across voice, WhatsApp, chat and email">
 
- [![Explore My World 🌍](https://img.shields.io/badge/Visit-My%20Website-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://nikhilsukthe.vercel.app/)
+</div>
 
-- Experienced in LLM architecture , fine-tuning , LangGraph, LangChain, NLP and Worked on Sentence Transformers .
-- Experienced In Parameter efficient Finetuning techniques(Lora & Q-Lora) , Feature Extraction technique
-- Experienced in Sentence transformers(all-minilm-L6-v2) for embedding in rag project
-- Experienced In Neural Network Auto Encoder feature understanding 
-- Built RAG Chatbot and Fine tuned (Gpt2 and Llama ) – LLMS for text generation (Humanizing)
-- Experienced In Vector Database - Chrome-DB, Pinecone, FAISS
-- Experienced In Database - MySQL, PostgreSQL, MongoDB
-- Experienced In Data Science Core stages able to make strong EDA on large scale data 
-- Experienced In Machine Learning ,ML–algorithms(architecture), Model Development , Model Performance Evaluation , Optimizing Model using Optimizing techniques like Hyper Parameter tuning(Grid search, Random search, Random Search) , Feature engineering & Feature selection , Regularization, Ensemble methods(bagging , boosting, stacking ) , early stopping, Cross-Validation , Pruning & Data Augmentation.
-- Built Advanced Interface for applications with clear cut look 
-- Worked Efficiently with deployment stage .(Railway, Vercel, Netlify, Aws)
+I build **AI agents that automate real business and get measured on outcomes** — voice agents that talk on the phone (LiveKit + SIP, streaming STT-LLM-TTS), WhatsApp commerce agents that take a customer from catalog to Razorpay payment without leaving the chat, and the chat & email automation around them. Founding AI Engineer at [Fika.ai](https://powersmy.biz). The metric is never the demo — it's collection rates, bookings, and latency. Hyderabad, India.
 
+### Open source
 
+[**livekit/agents #4798**](https://github.com/livekit/agents/pull/4798) · `fix(sarvam): prevent transcript loss after long agent responses`
 
-<img src="https://i.imgur.com/your-gif.gif" width="150px">
+A race condition in the Sarvam STT plugin: agent responses longer than ~10 s triggered premature task cancellation while buffered audio was still being processed — transcripts were silently dropped and the agent went mute mid-call. Found it running live voice-agent operations; fixed it upstream.
+
+### Now
+
+| | |
+|---|---|
+| **Building** | Multi-channel AI agents (voice · WhatsApp · chat · email) for healthcare, fintech and real-estate clients at Fika.ai |
+| **Running** | Live voice-agent ops — SIP trunks, STT/TTS provider A/B tests, per-call cost & latency telemetry |
+| **Exploring** | Speech-to-speech (Gemini Live), predictive & outbound dialers, MCP tool servers |
+
+### Selected work
+
+| | Project | The number that matters |
+|---|---|---|
+| Voice | **WhatsApp Voice Bridge** | WhatsApp Desktop → WASAPI → LiveKit → Gemini Live: two-way audio at **300–800 ms RTT**, zero SIP cost |
+| Voice | **LiveKit SIP Manager** | Full-stack SIP ops dashboard — trunks, dispatch rules, IP whitelisting, dialer — **zero CLI** |
+| Agents | **NBFC collections voice agent** | Production collections calls at Fika.ai — **collection rate up 50%** |
+| Agents | **LangGraph + RAG assistant** | **Sub-5 s** end-to-end latency, 15% engagement uplift |
+| Lab | [**ai-experiments-lab**](https://github.com/Nikhils-G/ai-experiments-lab) | Reproducible experiments across ML · DL · NLP · LLMs, one concept at a time |
+
+More on [nikhilsukthe.vercel.app](https://nikhilsukthe.vercel.app/).
+
+### One agent runtime, every channel
+
+```mermaid
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#2e1f54", "primaryTextColor": "#ece7f4", "primaryBorderColor": "#a78bfa", "lineColor": "#f0a63a", "fontFamily": "monospace", "fontSize": "14px"}}}%%
+flowchart LR
+    P["Phone · PSTN / SIP"] --> R["Agent runtime — LiveKit · STT ⇄ TTS"]
+    W["WhatsApp"] --> R
+    C["Chat · Email"] --> R
+    R --> L["LLM · tools · RAG · memory"]
+    L --> O["Outcomes — payments · bookings · collections · support"]
+```
+
+### Stack
+
+<img src="assets/stack.svg" width="800" alt="Stack — voice: LiveKit, SIP/WebRTC, STT/TTS, Gemini Live · agents: LangGraph, LangChain, MCP, RAG, LoRA/QLoRA · backend: Python, FastAPI, WebSockets, MongoDB, Redis, PostgreSQL · infra: Docker, Kubernetes, AWS, GCP Vertex, Langfuse · data: PyTorch, Pinecone, FAISS, ChromaDB">
+
+### Live stats
+
+<img src="assets/fetch-card.svg" width="820" alt="Neofetch-style card with live GitHub stats for Nikhils-G">
+
+### Recent activity
+
+<!-- ACTIVITY:START -->
+- Quiet on the public feed lately — the work is in production.
+<!-- ACTIVITY:END -->
+
+---
+
+<div align="center">
+
+[Website](https://nikhilsukthe.vercel.app/) · [LinkedIn](https://www.linkedin.com/in/nikhilsukthe) · [Email](mailto:sukthenikhil@gmail.com) · [ORCID](https://orcid.org/0009-0009-8318-1049)
+
+<sub>This profile updates itself — a daily [GitHub Action](.github/workflows/profile.yml) runs [one Python script](scripts/update_profile.py) that regenerates the stats card and activity feed. <!-- UPDATED:START -->
+Last refreshed: 2026-08-18 (UTC).
+<!-- UPDATED:END --></sub>
+
+<img src="https://github.com/Nikhils-G/Nikhils-G/actions/workflows/profile.yml/badge.svg" alt="profile refresh status">
 
 </div>
