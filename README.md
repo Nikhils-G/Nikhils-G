@@ -43,7 +43,7 @@ More on [nikhilsukthe.vercel.app](https://nikhilsukthe.vercel.app/).
 ### Recent activity
 
 <!-- ACTIVITY:START -->
-- Quiet on the public feed lately — the work is in production.
+- Pushed 2 commits to [Nikhils-G/Nikhils-G](https://github.com/Nikhils-G/Nikhils-G) · Aug 17
 <!-- ACTIVITY:END -->
 
 ---
