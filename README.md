@@ -53,7 +53,7 @@ More on [nikhilsukthe.vercel.app](https://nikhilsukthe.vercel.app/).
 [Website](https://nikhilsukthe.vercel.app/) · [LinkedIn](https://www.linkedin.com/in/nikhilsukthe) · [Email](mailto:sukthenikhil@gmail.com) · [ORCID](https://orcid.org/0009-0009-8318-1049)
 
 <sub>This profile updates itself — a daily [GitHub Action](.github/workflows/profile.yml) runs [one Python script](scripts/update_profile.py) that regenerates the stats card and activity feed. <!-- UPDATED:START -->
-Last refreshed: 2026-08-22 (UTC).
+Last refreshed: 2026-08-23 (UTC).
 <!-- UPDATED:END --></sub>
 
 <img src="https://github.com/Nikhils-G/Nikhils-G/actions/workflows/profile.yml/badge.svg" alt="profile refresh status">
