@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480" role="img" aria-label="A live call with Nikhil's voice agent. The call connects, a recording timer counts up in real time, and the agent's transcript types out: You've reached Nikhil's agent, he builds agents like me for a living. Founding AI Engineer at Fika.ai, voice, WhatsApp, chat, email. Collections voice agents in production, collection rate up 50 percent. WhatsApp to LiveKit bridge on Gemini Live at 300 to 800 milliseconds round trip. Upstream: livekit agents pull request 4798, fixed transcript loss in Sarvam STT. He also trains the models: PyTorch, LoRA, QLoRA, 4-bit. Want the human? sukthenikhil@gmail.com">
+  <defs>
+    <clipPath id="timer-window"><rect x="684" y="50" width="70" height="20"/></clipPath>
+  </defs>
+  <style>
+    .win    { fill: #fbf9f4; stroke: #e2dcd0; }
+    .bar    { fill: #f1ecdf; }
+    .dot1   { fill: #b45309; } .dot2 { fill: #7c3aed; } .dot3 { fill: #0e7490; }
+    .fg     { fill: #241f2e; }
+    .amber  { fill: #b45309; }
+    .violet { fill: #7c3aed; }
+    .muted  { fill: #6f6880; }
+    .ok     { fill: #1a7f37; }
+    .track  { fill: #e2dcd0; }
+    @media (prefers-color-scheme: dark) {
+      .win    { fill: #0f0a1a; stroke: #2d2640; }
+      .bar    { fill: #171126; }
+      .dot1   { fill: #f0a63a; } .dot2 { fill: #a78bfa; } .dot3 { fill: #67e8f9; }
+      .fg     { fill: #ece7f4; }
+      .amber  { fill: #f0a63a; }
+      .violet { fill: #a78bfa; }
+      .muted  { fill: #8d86a0; }
+      .ok     { fill: #3fb950; }
+      .track  { fill: #2d2640; }
+    }
+    text {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+    }
+    .title { font-size: 12.5px; }
+    .t14   { font-size: 14px; }
+    .t12   { font-size: 12px; }
+    .b     { font-weight: 700; }
+    .digit { font-size: 15px; font-weight: 700; }
+
+    /* reveals */
+    .ap { opacity: 0; animation: appear 0.25s ease-out forwards; }
+    @keyframes appear { to { opacity: 1; } }
+
+    /* connecting -> connected */
+    .connecting { animation: blink 0.9s steps(1, end) infinite, hide 0.01s linear 3s forwards; }
+    @keyframes blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0.25; } }
+    @keyframes hide  { to { opacity: 0; } }
+
+    /* recording dot */
+    .rec { opacity: 0; animation: appear 0.25s ease-out 3s forwards, pulse 1.2s ease-in-out 3.3s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    /* rolling digits — a real clock, no code */
+    .roll { transform: translateY(0); }
+    .s1  { animation: roll10 10s  steps(10, end) 3s infinite; }
+    .s10 { animation: roll6  60s  steps(6, end)  3s infinite; }
+    .m1  { animation: roll10 600s steps(10, end) 3s infinite; }
+    @keyframes roll10 { to { transform: translateY(-200px); } }
+    @keyframes roll6  { to { transform: translateY(-120px); } }
+    .colon { animation: blink 1s steps(1, end) 3s infinite; }
+
+    /* waveform */
+    .wave rect { transform-origin: center; animation: talk 1.6s ease-in-out infinite; }
+    @keyframes talk { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.3); } }
+
+    /* transcript typing */
+    .tl { clip-path: inset(0 100% 0 0); animation: type 1.5s steps(45, end) forwards; }
+    @keyframes type { to { clip-path: inset(0 -2% 0 0); } }
+    .d1 { animation-delay: 4s; }    .d2 { animation-delay: 7.5s; }
+    .d3 { animation-delay: 11s; }   .d4 { animation-delay: 14.5s; }
+    .d5 { animation-delay: 18s; }   .d6 { animation-delay: 21.5s; }
+    .d7 { animation-delay: 25s; }   .d8 { animation-delay: 28.5s; }
+    .cursor { opacity: 0; animation: appear 0.01s linear 29s forwards, blink 1s steps(1, end) 29s infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ap, .tl, .rec, .cursor { animation: none; opacity: 1; clip-path: none; }
+      .connecting { animation: none; opacity: 0; }
+      .roll, .colon, .wave rect { animation: none; }
+    }
+  </style>
+
+  <!-- window -->
+  <rect class="win" x="1" y="1" width="798" height="478" rx="10" stroke-width="1"/>
+  <path class="bar" d="M1 11 a10 10 0 0 1 10 -10 h778 a10 10 0 0 1 10 10 v25 h-798 z"/>
+  <circle class="dot1" cx="24" cy="19" r="6"/>
+  <circle class="dot2" cx="46" cy="19" r="6"/>
+  <circle class="dot3" cx="68" cy="19" r="6"/>
+  <text class="muted title" x="400" y="23" text-anchor="middle">nikhil.agent — live call · SIP / WebRTC</text>
+
+  <!-- call header -->
+  <text class="fg t14" x="28" y="66"><tspan class="muted">incoming</tspan><tspan dx="10">recruiter@github</tspan><tspan class="muted" dx="10">→</tspan><tspan class="amber b" dx="10">nikhil.agent</tspan></text>
+  <text class="muted connecting" x="28" y="90">connecting to nikhil.agent …</text>
+  <text class="ok ap" style="animation-delay:3s" x="28" y="90"><tspan>●</tspan><tspan dx="6">connected</tspan><tspan class="muted" dx="10">— STT ⇄ LLM ⇄ TTS streaming · end-to-end encrypted</tspan></text>
+
+  <!-- REC + real-time timer -->
+  <circle class="amber rec" cx="628" cy="61" r="5"/>
+  <text class="muted b ap" style="animation-delay:3s" x="640" y="66">REC</text>
+  <g class="ap" style="animation-delay:3s">
+    <g clip-path="url(#timer-window)">
+      <g transform="translate(694,66)"><text class="fg digit" text-anchor="middle">0</text></g>
+      <g transform="translate(707,66)"><g class="roll m1">
+        <text class="fg digit" text-anchor="middle" y="0">0</text><text class="fg digit" text-anchor="middle" y="20">1</text><text class="fg digit" text-anchor="middle" y="40">2</text><text class="fg digit" text-anchor="middle" y="60">3</text><text class="fg digit" text-anchor="middle" y="80">4</text><text class="fg digit" text-anchor="middle" y="100">5</text><text class="fg digit" text-anchor="middle" y="120">6</text><text class="fg digit" text-anchor="middle" y="140">7</text><text class="fg digit" text-anchor="middle" y="160">8</text><text class="fg digit" text-anchor="middle" y="180">9</text>
+      </g></g>
+      <g transform="translate(718,65)"><text class="fg digit colon" text-anchor="middle">:</text></g>
+      <g transform="translate(729,66)"><g class="roll s10">
+        <text class="fg digit" text-anchor="middle" y="0">0</text><text class="fg digit" text-anchor="middle" y="20">1</text><text class="fg digit" text-anchor="middle" y="40">2</text><text class="fg digit" text-anchor="middle" y="60">3</text><text class="fg digit" text-anchor="middle" y="80">4</text><text class="fg digit" text-anchor="middle" y="100">5</text>
+      </g></g>
+      <g transform="translate(742,66)"><g class="roll s1">
+        <text class="fg digit" text-anchor="middle" y="0">0</text><text class="fg digit" text-anchor="middle" y="20">1</text><text class="fg digit" text-anchor="middle" y="40">2</text><text class="fg digit" text-anchor="middle" y="60">3</text><text class="fg digit" text-anchor="middle" y="80">4</text><text class="fg digit" text-anchor="middle" y="100">5</text><text class="fg digit" text-anchor="middle" y="120">6</text><text class="fg digit" text-anchor="middle" y="140">7</text><text class="fg digit" text-anchor="middle" y="160">8</text><text class="fg digit" text-anchor="middle" y="180">9</text>
+      </g></g>
+    </g>
+  </g>
+
+  <!-- waveform: the agent speaking -->
+  <g class="wave ap" style="animation-delay:3s">
+    <rect class="amber"  x="40"  y="123" width="7" height="10" rx="3.5" style="animation-delay:0.00s"/>
+    <rect class="violet" x="71"  y="119" width="7" height="18" rx="3.5" style="animation-delay:0.12s"/>
+    <rect class="amber"  x="102" y="113" width="7" height="30" rx="3.5" style="animation-delay:0.24s"/>
+    <rect class="violet" x="133" y="107" width="7" height="42" rx="3.5" style="animation-delay:0.36s"/>
+    <rect class="amber"  x="164" y="115" width="7" height="26" rx="3.5" style="animation-delay:0.48s"/>
+    <rect class="violet" x="195" y="109" width="7" height="38" rx="3.5" style="animation-delay:0.60s"/>
+    <rect class="amber"  x="226" y="121" width="7" height="14" rx="3.5" style="animation-delay:0.72s"/>
+    <rect class="violet" x="257" y="117" width="7" height="22" rx="3.5" style="animation-delay:0.84s"/>
+    <rect class="amber"  x="288" y="106" width="7" height="44" rx="3.5" style="animation-delay:0.96s"/>
+    <rect class="violet" x="319" y="111" width="7" height="34" rx="3.5" style="animation-delay:1.08s"/>
+    <rect class="amber"  x="350" y="118" width="7" height="20" rx="3.5" style="animation-delay:1.20s"/>
+    <rect class="violet" x="381" y="122" width="7" height="12" rx="3.5" style="animation-delay:1.32s"/>
+    <rect class="amber"  x="412" y="114" width="7" height="28" rx="3.5" style="animation-delay:1.44s"/>
+    <rect class="violet" x="443" y="108" width="7" height="40" rx="3.5" style="animation-delay:0.06s"/>
+    <rect class="amber"  x="474" y="116" width="7" height="24" rx="3.5" style="animation-delay:0.18s"/>
+    <rect class="violet" x="505" y="120" width="7" height="16" rx="3.5" style="animation-delay:0.30s"/>
+    <rect class="amber"  x="536" y="110" width="7" height="36" rx="3.5" style="animation-delay:0.42s"/>
+    <rect class="violet" x="567" y="105" width="7" height="46" rx="3.5" style="animation-delay:0.54s"/>
+    <rect class="amber"  x="598" y="113" width="7" height="30" rx="3.5" style="animation-delay:0.66s"/>
+    <rect class="violet" x="629" y="119" width="7" height="18" rx="3.5" style="animation-delay:0.78s"/>
+    <rect class="amber"  x="660" y="115" width="7" height="26" rx="3.5" style="animation-delay:0.90s"/>
+    <rect class="violet" x="691" y="109" width="7" height="38" rx="3.5" style="animation-delay:1.02s"/>
+    <rect class="amber"  x="722" y="117" width="7" height="22" rx="3.5" style="animation-delay:1.14s"/>
+    <rect class="violet" x="753" y="122" width="7" height="12" rx="3.5" style="animation-delay:1.26s"/>
+  </g>
+
+  <rect class="track" x="28" y="160" width="744" height="1"/>
+
+  <!-- transcript -->
+  <text class="tl d1" x="28" y="188"><tspan class="muted">[00:01]</tspan><tspan class="violet b" dx="8">agent ▸</tspan><tspan class="fg" dx="8">You've reached Nikhil's agent. He builds agents like me — for a living.</tspan></text>
+  <text class="tl d2" x="28" y="215"><tspan class="muted">[00:04]</tspan><tspan class="violet b" dx="8">agent ▸</tspan><tspan class="fg" dx="8">Founding AI Engineer @ Fika.ai — voice · WhatsApp · chat · email.</tspan></text>
+  <text class="tl d3" x="28" y="242"><tspan class="muted">[00:08]</tspan><tspan class="violet b" dx="8">agent ▸</tspan><tspan class="fg" dx="8">Right now: collections voice agents in production — collection rate up 50%.</tspan></text>
+  <text class="tl d4" x="28" y="269"><tspan class="muted">[00:11]</tspan><tspan class="violet b" dx="8">agent ▸</tspan><tspan class="fg" dx="8">Side project: WhatsApp → LiveKit bridge on Gemini Live, 300–800 ms RTT.</tspan></text>
+  <text class="tl d5" x="28" y="296"><tspan class="muted">[00:15]</tspan><tspan class="violet b" dx="8">agent ▸</tspan><tspan class="fg" dx="8">Upstream: livekit/agents #4798 — fixed transcript loss in Sarvam STT.</tspan></text>
+  <text class="tl d6" x="28" y="323"><tspan class="muted">[00:18]</tspan><tspan class="violet b" dx="8">agent ▸</tspan><tspan class="fg" dx="8">He also trains the models — PyTorch, LoRA/QLoRA, quantized to 4-bit.</tspan></text>
+  <text class="tl d7" x="28" y="350"><tspan class="muted">[00:22]</tspan><tspan class="violet b" dx="8">agent ▸</tspan><tspan class="fg" dx="8">Want the human? sukthenikhil@gmail.com — transferring you now…</tspan></text>
+  <text class="tl d8" x="28" y="377"><tspan class="muted">[00:25]</tspan><tspan class="amber b" dx="8">you ▸</tspan></text>
+  <rect class="amber cursor" x="138" y="366" width="8" height="14"/>
+
+  <text class="muted t12" x="400" y="442" text-anchor="middle">no backend · no script · pure SVG — the timer is real time</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="64" viewBox="0 0 800 64" role="img" aria-label="You've been here for a while — long enough to say hi: sukthenikhil@gmail.com">
+  <defs>
+    <clipPath id="linger-window"><rect x="244" y="26" width="68" height="20"/></clipPath>
+  </defs>
+  <style>
+    .fg    { fill: #241f2e; }
+    .amber { fill: #b45309; }
+    .muted { fill: #6f6880; }
+    @media (prefers-color-scheme: dark) {
+      .fg    { fill: #ece7f4; }
+      .amber { fill: #f0a63a; }
+      .muted { fill: #8d86a0; }
+    }
+    text {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 14px;
+    }
+    .digit { font-size: 15px; font-weight: 700; }
+    .roll { transform: translateY(0); }
+    .s1  { animation: roll10 10s  steps(10, end) infinite; }
+    .s10 { animation: roll6  60s  steps(6, end)  infinite; }
+    .m1  { animation: roll10 600s steps(10, end) infinite; }
+    @keyframes roll10 { to { transform: translateY(-200px); } }
+    @keyframes roll6  { to { transform: translateY(-120px); } }
+    .colon { animation: blink 1s steps(1, end) infinite; }
+    @keyframes blink { 0%, 55% { opacity: 1; } 56%, 100% { opacity: 0.25; } }
+    @media (prefers-reduced-motion: reduce) { .roll, .colon { animation: none; } }
+  </style>
+
+  <text class="muted" x="104" y="40">you've been here</text>
+  <g clip-path="url(#linger-window)">
+    <g transform="translate(252,40)"><text class="amber digit" text-anchor="middle">0</text></g>
+    <g transform="translate(264,40)"><g class="roll m1">
+      <text class="amber digit" text-anchor="middle" y="0">0</text><text class="amber digit" text-anchor="middle" y="20">1</text><text class="amber digit" text-anchor="middle" y="40">2</text><text class="amber digit" text-anchor="middle" y="60">3</text><text class="amber digit" text-anchor="middle" y="80">4</text><text class="amber digit" text-anchor="middle" y="100">5</text><text class="amber digit" text-anchor="middle" y="120">6</text><text class="amber digit" text-anchor="middle" y="140">7</text><text class="amber digit" text-anchor="middle" y="160">8</text><text class="amber digit" text-anchor="middle" y="180">9</text>
+    </g></g>
+    <g transform="translate(276,39)"><text class="amber digit colon" text-anchor="middle">:</text></g>
+    <g transform="translate(288,40)"><g class="roll s10">
+      <text class="amber digit" text-anchor="middle" y="0">0</text><text class="amber digit" text-anchor="middle" y="20">1</text><text class="amber digit" text-anchor="middle" y="40">2</text><text class="amber digit" text-anchor="middle" y="60">3</text><text class="amber digit" text-anchor="middle" y="80">4</text><text class="amber digit" text-anchor="middle" y="100">5</text>
+    </g></g>
+    <g transform="translate(300,40)"><g class="roll s1">
+      <text class="amber digit" text-anchor="middle" y="0">0</text><text class="amber digit" text-anchor="middle" y="20">1</text><text class="amber digit" text-anchor="middle" y="40">2</text><text class="amber digit" text-anchor="middle" y="60">3</text><text class="amber digit" text-anchor="middle" y="80">4</text><text class="amber digit" text-anchor="middle" y="100">5</text><text class="amber digit" text-anchor="middle" y="120">6</text><text class="amber digit" text-anchor="middle" y="140">7</text><text class="amber digit" text-anchor="middle" y="160">8</text><text class="amber digit" text-anchor="middle" y="180">9</text>
+    </g></g>
+  </g>
+  <text class="muted" x="316" y="40">— long enough to say hi →</text>
+  <text class="amber" x="534" y="40">sukthenikhil@gmail.com</text>
+</svg>
