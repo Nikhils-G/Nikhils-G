@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" role="img" aria-label="Nikhil's lab, live. Left: a training run — torchrun train.py with LoRA rank 16 and 4-bit quantization on three years of production incidents; train and validation loss curves draw themselves down from 2.31 to 0.47 across three epochs, then the checkpoint nikhil-v3.safetensors is saved. Right: an EDA notebook where a scatter plot of p95 latency versus training step plots itself, a regression line fits with r squared 0.94, and df.describe shows 1.2 million rows, zero nulls, p95 latency cut from 1900 to 780 milliseconds, AUC 0.97, F1 0.93, no drift, no leakage — production-ready.">
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420" role="img" aria-label="Nikhil's lab, live. Left: a QLoRA fine-tuning run of Qwen2.5-7B with PyTorch and TRL at 4-bit — train and validation loss curves draw themselves down across three epochs, ending at 89 percent accuracy with adapters merged and served via vLLM. Right: the TurnWave notebook — end-of-turn latency versus training step plots itself with a regression fit of r squared 0.94, and the evaluation reports 200K training pairs, a custom BPE tokenizer, F1 0.798 versus a 0.753 cue-word baseline, AP 0.832 versus 0.624, 7M parameters, no pretrained weights.">
   <style>
     .win    { fill: #fbf9f4; stroke: #e2dcd0; }
     .bar    { fill: #f1ecdf; }
@@ -86,14 +86,14 @@
   <circle class="dot1" cx="24" cy="19" r="6"/>
   <circle class="dot2" cx="46" cy="19" r="6"/>
   <circle class="dot3" cx="68" cy="19" r="6"/>
-  <text class="muted title" x="400" y="23" text-anchor="middle">nikhil@ai-lab: ~ — tmux ▸ train.py │ eda.ipynb</text>
+  <text class="muted title" x="400" y="23" text-anchor="middle">nikhil@ai-lab: ~ — tmux ▸ train.py │ turnwave.ipynb</text>
   <rect class="track" x="460" y="48" width="1" height="354"/>
 
   <!-- ===== left pane: training run ===== -->
-  <text class="fg tl" style="animation-delay:0.4s" x="28" y="64"><tspan class="amber">$</tspan><tspan dx="8">torchrun train.py --model nikhil-v3 \</tspan></text>
-  <text class="fg tl" style="animation-delay:1.6s" x="28" y="82"><tspan dx="30">--lora r=16 --quant 4bit --data prod_incidents/</tspan></text>
-  <text class="muted t12 ap" style="animation-delay:2.8s" x="28" y="104">dataset    3 yrs of production incidents · 1.2M turns</text>
-  <text class="muted t12 ap" style="animation-delay:3.2s" x="28" y="120">objective  min(latency) · max(outcomes)</text>
+  <text class="fg tl" style="animation-delay:0.4s" x="28" y="64"><tspan class="amber">$</tspan><tspan dx="8">torchrun train.py --model Qwen2.5-7B \</tspan></text>
+  <text class="fg tl" style="animation-delay:1.6s" x="28" y="82"><tspan dx="30">--qlora r=16 --quant 4bit --trainer trl.SFT</tspan></text>
+  <text class="muted t12 ap" style="animation-delay:2.8s" x="28" y="104">dataset    production calls · high-volume intents</text>
+  <text class="muted t12 ap" style="animation-delay:3.2s" x="28" y="120">objective  accuracy ↑ · latency ↓ · serve via vLLM</text>
 
   <!-- loss chart -->
   <line class="grid" x1="40" y1="170" x2="430" y2="170"/>
@@ -120,7 +120,7 @@
   <rect class="track" x="120" y="292" width="310" height="10" rx="5"/>
   <rect class="amber fill" x="120" y="292" width="310" height="10" rx="5"/>
 
-  <text class="ok ap" style="animation-delay:16.2s" x="40" y="326">✓ saved  nikhil-v3.safetensors  ·  4-bit  ·  2.1 GB</text>
+  <text class="ok ap" style="animation-delay:16.2s" x="40" y="326">✓ 89% accuracy · adapters merged · served via vLLM</text>
   <text class="amber ap" style="animation-delay:16.8s" x="40" y="352">$</text>
   <rect class="amber cursor" x="52" y="341" width="8" height="14"/>
 
@@ -136,10 +136,10 @@
   <text class="muted t12" x="146" y="384">util 97% · 24 GB</text>
 
   <!-- ===== right pane: EDA notebook ===== -->
-  <text class="fg t12 tl" style="animation-delay:1.0s" x="476" y="64"><tspan class="violet">In [1]:</tspan><tspan dx="8">regplot(df.step, df.p95_ms)</tspan></text>
+  <text class="fg t12 tl" style="animation-delay:1.0s" x="476" y="64"><tspan class="violet">In [1]:</tspan><tspan dx="8">regplot(df.step, df.eot_ms)</tspan></text>
 
   <polyline class="axis" points="486,80 486,236 762,236"/>
-  <text class="muted t11" x="492" y="92">p95 ms</text>
+  <text class="muted t11" x="492" y="92">eot ms</text>
   <text class="muted t11" x="762" y="250" text-anchor="end">step</text>
   <g>
     <circle class="amber ap" style="animation-delay:5.00s" cx="500" cy="109" r="3.5"/>
@@ -162,10 +162,10 @@
   <line class="reg" pathLength="100" x1="496" y1="98" x2="756" y2="225"/>
   <text class="violet t12 b ap" style="animation-delay:10.4s" x="756" y="96" text-anchor="end">r² = 0.94</text>
 
-  <text class="fg t12 tl" style="animation-delay:11.0s" x="476" y="272"><tspan class="violet">In [2]:</tspan><tspan dx="8">df.describe().T</tspan></text>
-  <text class="muted t12 tl" style="animation-delay:11.6s" x="476" y="290">rows      1.2M    nulls    0.00%</text>
-  <text class="muted t12 tl" style="animation-delay:12.2s" x="476" y="308">p95_ms    1900 → 780      -59%</text>
-  <text class="muted t12 tl" style="animation-delay:12.8s" x="476" y="326">auc       0.97    f1       0.93</text>
-  <text class="muted t12 tl" style="animation-delay:13.4s" x="476" y="344">drift     none    leakage  none</text>
-  <text class="ok t12 ap" style="animation-delay:14.2s" x="476" y="380"><tspan class="b">Out[2]:</tspan><tspan dx="8">✓ production-ready</tspan></text>
+  <text class="fg t12 tl" style="animation-delay:11.0s" x="476" y="272"><tspan class="violet">In [2]:</tspan><tspan dx="8">turnwave.evaluate()</tspan></text>
+  <text class="muted t12 tl" style="animation-delay:11.6s" x="476" y="290">pairs     200K    tokenizer  BPE</text>
+  <text class="muted t12 tl" style="animation-delay:12.2s" x="476" y="308">F1        0.798   baseline   0.753</text>
+  <text class="muted t12 tl" style="animation-delay:12.8s" x="476" y="326">AP        0.832   baseline   0.624</text>
+  <text class="muted t12 tl" style="animation-delay:13.4s" x="476" y="344">params    7M      pretrained none</text>
+  <text class="ok t12 ap" style="animation-delay:14.2s" x="476" y="380"><tspan class="b">Out[2]:</tspan><tspan dx="8">✓ beats cue-word baseline</tspan></text>
 </svg>
