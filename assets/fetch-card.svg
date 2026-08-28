@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="300" viewBox="0 0 820 300" role="img" aria-label="Live GitHub stats for nikhils-g">
+  <defs>
+    <linearGradient id="wave-grad" gradientUnits="userSpaceOnUse" x1="46" y1="0" x2="202" y2="0">
+      <stop offset="0" class="g-amber"/>
+      <stop offset="1" class="g-violet"/>
+    </linearGradient>
+  </defs>
+  <style>
+    .win    { fill: #fbf9f4; stroke: #e2dcd0; }
+    .bar    { fill: #f1ecdf; }
+    .dot1   { fill: #b45309; } .dot2 { fill: #7c3aed; } .dot3 { fill: #0e7490; }
+    .fg     { fill: #241f2e; }
+    .amber  { fill: #b45309; }
+    .violet { fill: #7c3aed; }
+    .muted  { fill: #6f6880; }
+    .track  { fill: #e2dcd0; }
+    .g-amber  { stop-color: #b45309; }
+    .g-violet { stop-color: #7c3aed; }
+    @media (prefers-color-scheme: dark) {
+      .win    { fill: #0f0a1a; stroke: #2d2640; }
+      .bar    { fill: #171126; }
+      .dot1   { fill: #f0a63a; } .dot2 { fill: #a78bfa; } .dot3 { fill: #67e8f9; }
+      .fg     { fill: #ece7f4; }
+      .amber  { fill: #f0a63a; }
+      .violet { fill: #a78bfa; }
+      .muted  { fill: #8d86a0; }
+      .track  { fill: #2d2640; }
+      .g-amber  { stop-color: #f0a63a; }
+      .g-violet { stop-color: #a78bfa; }
+    }
+    text {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 14.5px;
+    }
+    .title { font-size: 12.5px; }
+    .host  { font-size: 17px; font-weight: 700; }
+    .wave rect { transform-origin: center; animation: pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.45); } }
+    @media (prefers-reduced-motion: reduce) { .wave rect { animation: none; } }
+  </style>
+
+  <rect class="win" x="1" y="1" width="818" height="298" rx="10" stroke-width="1"/>
+  <path class="bar" d="M1 11 a10 10 0 0 1 10 -10 h798 a10 10 0 0 1 10 10 v25 h-818 z"/>
+  <circle class="dot1" cx="24" cy="19" r="6"/>
+  <circle class="dot2" cx="46" cy="19" r="6"/>
+  <circle class="dot3" cx="68" cy="19" r="6"/>
+  <text class="muted title" x="410" y="23" text-anchor="middle">nikhils-g@github: ~/stats</text>
+
+  <g class="wave">
+    <rect fill="url(#wave-grad)" x="46" y="161" width="7" height="22" rx="3.5" style="animation-delay: 0.00s"/>
+    <rect fill="url(#wave-grad)" x="59" y="149" width="7" height="46" rx="3.5" style="animation-delay: 0.15s"/>
+    <rect fill="url(#wave-grad)" x="72" y="135" width="7" height="74" rx="3.5" style="animation-delay: 0.30s"/>
+    <rect fill="url(#wave-grad)" x="85" y="118" width="7" height="108" rx="3.5" style="animation-delay: 0.45s"/>
+    <rect fill="url(#wave-grad)" x="98" y="128" width="7" height="88" rx="3.5" style="animation-delay: 0.60s"/>
+    <rect fill="url(#wave-grad)" x="111" y="107" width="7" height="130" rx="3.5" style="animation-delay: 0.75s"/>
+    <rect fill="url(#wave-grad)" x="124" y="140" width="7" height="64" rx="3.5" style="animation-delay: 0.90s"/>
+    <rect fill="url(#wave-grad)" x="137" y="113" width="7" height="118" rx="3.5" style="animation-delay: 1.05s"/>
+    <rect fill="url(#wave-grad)" x="150" y="124" width="7" height="96" rx="3.5" style="animation-delay: 1.20s"/>
+    <rect fill="url(#wave-grad)" x="163" y="146" width="7" height="52" rx="3.5" style="animation-delay: 1.35s"/>
+    <rect fill="url(#wave-grad)" x="176" y="133" width="7" height="78" rx="3.5" style="animation-delay: 1.50s"/>
+    <rect fill="url(#wave-grad)" x="189" y="155" width="7" height="34" rx="3.5" style="animation-delay: 1.65s"/>
+  </g>
+
+  <text class="host amber" x="240" y="72">nikhils-g@github</text>
+  <rect class="track" x="240" y="84" width="540" height="1.5"/>
+  <text class="violet" x="240" y="116">role</text>
+  <text class="fg" x="372" y="116">Founding AI Engineer @ Fika.ai</text>
+  <text class="violet" x="240" y="142">focus</text>
+  <text class="fg" x="372" y="142">multimodal · multi-agent · realtime voice infra</text>
+  <text class="violet" x="240" y="168">repos</text>
+  <text class="fg" x="372" y="168">54 public</text>
+  <text class="violet" x="240" y="194">stars</text>
+  <text class="fg" x="372" y="194">16 earned</text>
+  <text class="violet" x="240" y="220">followers</text>
+  <text class="fg" x="372" y="220">1</text>
+  <text class="violet" x="240" y="246">commits</text>
+  <text class="fg" x="372" y="246">22 in 2026</text>
+  <text class="violet" x="240" y="272">uptime</text>
+  <text class="fg" x="372" y="272">3 yrs 4 mos on GitHub</text>
+</svg>
