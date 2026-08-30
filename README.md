@@ -4,33 +4,26 @@
 
 </div>
 
-I build **AI agents that automate real business and get measured on outcomes** — voice agents that talk on the phone (LiveKit + SIP, streaming STT-LLM-TTS), WhatsApp commerce agents that take a customer from catalog to Razorpay payment without leaving the chat, and the chat & email automation around them. Founding AI Engineer at [Fika.ai](https://powersmy.biz). The metric is never the demo — it's collection rates, bookings, and latency. Hyderabad, India.
+**I build AI agents that businesses pay for** — voice agents that make and take phone calls, WhatsApp agents that sell (catalog to Razorpay payment without leaving the chat), and the chat and email automation around them. Founding AI Engineer at [Fika.ai](https://powersmy.biz), Hyderabad. The metric is never the demo. It's collection rates, bookings, and milliseconds.
 
-### Open source
+### What production taught me
 
-[**livekit/agents #4798**](https://github.com/livekit/agents/pull/4798) · `fix(sarvam): prevent transcript loss after long agent responses`
+**Latency is the product.** Past about 800 ms, callers notice the lag. My WhatsApp Voice Bridge (WhatsApp Desktop → WASAPI → LiveKit → Gemini Live) holds two-way audio at **300–800 ms** round-trip, with zero SIP cost.
 
-A race condition in the Sarvam STT plugin: agent responses longer than ~10 s triggered premature task cancellation while buffered audio was still being processed — transcripts were silently dropped and the agent went mute mid-call. Found it running live voice-agent operations; fixed it upstream.
+**A silent agent is the worst bug.** In LiveKit's Sarvam STT plugin, agent responses longer than ~10 s cancelled the task while audio was still buffered — transcripts vanished and the agent went mute mid-call. I found it on live calls and fixed it upstream: [livekit/agents #4798](https://github.com/livekit/agents/pull/4798) *(PR open)*.
 
-### Now
+**Same brain, different mouth.** Phone, WhatsApp, chat and email run on one agent runtime — LiveKit and SIP for voice, LangGraph with RAG and MCP for reasoning, FastAPI, Redis and Postgres underneath, Langfuse so the numbers are measured, not guessed.
+
+**One concept at a time.** [ai-experiments-lab](https://github.com/Nikhils-G/ai-experiments-lab): 17 notebooks, each a single idea worked end to end — autoencoders, LSTMs, CNNs on Fashion-MNIST, GPT-2 generation, K-Means, PCA, cross-validated model tuning — and LoRA/QLoRA fine-tuning in the runtime's LLM core.
+
+### Work
 
 | | |
 |---|---|
-| **Building** | Multi-channel AI agents (voice · WhatsApp · chat · email) for healthcare, fintech and real-estate clients at Fika.ai |
-| **Running** | Live voice-agent ops — SIP trunks, STT/TTS provider A/B tests, per-call cost & latency telemetry |
-| **Exploring** | Speech-to-speech (Gemini Live), predictive & outbound dialers, MCP tool servers |
-
-### Selected work
-
-| | Project | The number that matters |
-|---|---|---|
-| Voice | **WhatsApp Voice Bridge** | WhatsApp Desktop → WASAPI → LiveKit → Gemini Live: two-way audio at **300–800 ms RTT**, zero SIP cost |
-| Voice | **LiveKit SIP Manager** | Full-stack SIP ops dashboard — trunks, dispatch rules, IP whitelisting, dialer — **zero CLI** |
-| Agents | **NBFC collections voice agent** | Production collections calls at Fika.ai — **collection rate up 50%** |
-| Agents | **LangGraph + RAG assistant** | **Sub-5 s** end-to-end latency, 15% engagement uplift |
-| Lab | [**ai-experiments-lab**](https://github.com/Nikhils-G/ai-experiments-lab) | Reproducible experiments across ML · DL · NLP · LLMs, one concept at a time |
-
-More on [nikhilsukthe.vercel.app](https://nikhilsukthe.vercel.app/).
+| **NBFC collections voice agent** | Production collections calls at Fika.ai — **collection rate up 50%** |
+| **LiveKit SIP Manager** | Trunks, dispatch rules, IP whitelisting, dialer — the whole SIP ops surface, **zero CLI** |
+| **LangGraph + RAG assistant** | **Sub-5 s** end to end, **15%** engagement uplift |
+| **Now** | Multi-channel agents for healthcare, fintech and real-estate clients · live voice ops — SIP trunks, STT/TTS A/B tests, per-call cost & latency telemetry · exploring speech-to-speech, predictive dialers, MCP tool servers |
 
 ### One runtime, every channel
 
@@ -40,19 +33,13 @@ More on [nikhilsukthe.vercel.app](https://nikhilsukthe.vercel.app/).
 
 <img src="assets/fetch-card.svg" width="820" alt="Neofetch-style card with live GitHub stats for Nikhils-G">
 
-### Recent activity
-
-<!-- ACTIVITY:START -->
-- Pushed 2 commits to [Nikhils-G/Nikhils-G](https://github.com/Nikhils-G/Nikhils-G) · Aug 17
-<!-- ACTIVITY:END -->
-
 ---
 
 <div align="center">
 
 [Website](https://nikhilsukthe.vercel.app/) · [LinkedIn](https://www.linkedin.com/in/nikhilsukthe) · [Email](mailto:sukthenikhil@gmail.com) · [ORCID](https://orcid.org/0009-0009-8318-1049)
 
-<sub>This profile updates itself — a daily [GitHub Action](.github/workflows/profile.yml) runs [one Python script](scripts/update_profile.py) that regenerates the stats card and activity feed. <!-- UPDATED:START -->
+<sub>This profile updates itself — a daily [GitHub Action](.github/workflows/profile.yml) runs [one Python script](scripts/update_profile.py) that regenerates the stats card. <!-- UPDATED:START -->
 Last refreshed: 2026-08-25 (UTC).
 <!-- UPDATED:END --></sub>
 

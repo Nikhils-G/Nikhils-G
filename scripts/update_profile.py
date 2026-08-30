@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Regenerate the profile's fetch card and recent-activity section.
+"""Regenerate the profile's fetch card.
 
 Runs daily from .github/workflows/profile.yml. Also safe to run locally:
 
     python3 scripts/update_profile.py
 
 Uses only the standard library. If GITHUB_TOKEN is set it is used for
-higher API rate limits; unauthenticated works fine too (~5 requests).
+higher API rate limits; unauthenticated works fine too (~4 requests).
 """
 
 import datetime
@@ -77,11 +77,6 @@ def collect():
     days = (datetime.date.today() - created).days
     uptime = f"{days // 365} yrs {(days % 365) // 30} mos"
 
-    try:
-        events = api_get(f"/users/{USER}/events/public?per_page=30")
-    except (urllib.error.URLError, urllib.error.HTTPError):
-        events = []
-
     return {
         "repos": user["public_repos"],
         "followers": user["followers"],
@@ -89,7 +84,6 @@ def collect():
         "commits": commits,
         "year": year,
         "uptime": uptime,
-        "events": events,
     }
 
 
@@ -217,64 +211,7 @@ def render_card(stats):
     )
 
 
-# ------------------------------------------------------------ activity
-
-def format_events(events):
-    lines = []
-    pushed = {}  # repo -> [commit_count, date]
-    for ev in events:
-        repo = ev["repo"]["name"]
-        url = f"https://github.com/{repo}"
-        date = datetime.datetime.strptime(
-            ev["created_at"], "%Y-%m-%dT%H:%M:%SZ"
-        ).strftime("%b %d")
-        kind = ev["type"]
-        payload = ev.get("payload", {})
-
-        if kind == "PushEvent":
-            if repo in pushed:
-                pushed[repo][0] += payload.get("size", 1)
-            else:
-                pushed[repo] = [payload.get("size", 1), date]
-                lines.append(("push", repo, url, date))
-        elif kind == "PullRequestEvent" and payload.get("action") == "opened":
-            pr = payload["pull_request"]
-            lines.append(
-                ("text", f"Opened PR [{repo}#{pr['number']}]({pr['html_url']}) — {pr['title']}", None, date)
-            )
-        elif kind == "IssuesEvent" and payload.get("action") == "opened":
-            issue = payload["issue"]
-            lines.append(
-                ("text", f"Opened issue [{repo}#{issue['number']}]({issue['html_url']}) — {issue['title']}", None, date)
-            )
-        elif kind == "WatchEvent":
-            lines.append(("text", f"Starred [{repo}]({url})", None, date))
-        elif kind == "ForkEvent":
-            lines.append(("text", f"Forked [{repo}]({url})", None, date))
-        elif kind == "ReleaseEvent" and payload.get("action") == "published":
-            rel = payload["release"]
-            lines.append(
-                ("text", f"Released [{rel['tag_name']}]({rel['html_url']}) in [{repo}]({url})", None, date)
-            )
-        elif kind == "CreateEvent" and payload.get("ref_type") == "repository":
-            lines.append(("text", f"Created [{repo}]({url})", None, date))
-
-        if len(lines) >= 5:
-            break
-
-    rendered = []
-    for kind, text, url, date in lines[:5]:
-        if kind == "push":
-            count = pushed[text][0]
-            noun = "commit" if count == 1 else "commits"
-            rendered.append(f"- Pushed {count} {noun} to [{text}]({url}) · {date}")
-        else:
-            rendered.append(f"- {text} · {date}")
-
-    if not rendered:
-        rendered = ["- Quiet on the public feed lately — the work is in production."]
-    return "\n".join(rendered)
-
+# ------------------------------------------------------------- readme
 
 def splice(content, start, end, replacement):
     pattern = re.compile(
@@ -292,17 +229,13 @@ def main():
     CARD.write_text(render_card(stats), encoding="utf-8")
 
     readme = README.read_text(encoding="utf-8")
-    readme = splice(
-        readme, "<!-- ACTIVITY:START -->", "<!-- ACTIVITY:END -->",
-        format_events(stats["events"]),
-    )
     today = datetime.date.today().isoformat()
     readme = splice(
         readme, "<!-- UPDATED:START -->", "<!-- UPDATED:END -->",
         f"Last refreshed: {today} (UTC).",
     )
     README.write_text(readme, encoding="utf-8")
-    print(f"fetch card + activity refreshed ({today})")
+    print(f"fetch card refreshed ({today})")
 
 
 if __name__ == "__main__":
