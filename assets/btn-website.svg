@@ -1,36 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="150" height="44" viewBox="0 0 150 44" role="img" aria-label="Website">
+<svg xmlns="http://www.w3.org/2000/svg" width="102" height="36" viewBox="0 0 102 36" role="img" aria-label="Website">
   <defs>
-    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" class="ga"/><stop offset="1" class="gv"/></linearGradient>
-    <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0"><stop offset="0" class="sh" stop-opacity="0"/><stop offset="0.5" class="sh" stop-opacity="1"/><stop offset="1" class="sh" stop-opacity="0"/></linearGradient>
-    <clipPath id="pill"><rect x="1" y="1" width="148" height="42" rx="21"/></clipPath>
+    <linearGradient id="surf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="s0"/><stop offset="1" class="s1"/></linearGradient>
   </defs>
   <style>
-    .fill  { fill: #fbf9f4; }
-    .ga    { stop-color: #b45309; } .gv { stop-color: #7c3aed; }
-    .label { fill: #241f2e; font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13.5px; font-weight: 600; letter-spacing: 0.2px; }
-    .glyph { fill: #ffffff; font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-weight: 700; }
-    .icon  { fill: #7c3aed; }
-    .line  { fill: none; stroke: #7c3aed; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-    .sh    { stop-color: #7c3aed; }
-    .sheen { opacity: 0.14; animation: sweep 7s ease-in-out 3.0s infinite; }
+    .s0 { stop-color: #ffffff; } .s1 { stop-color: #f6f8fa; }
+    .edge { stroke: #d0d7de; }
+    .inner { stroke: #ffffff; }
+    .label { fill: #1f2328; font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 500; }
+    .ic { fill: none; stroke: #6f42c1; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .gl { fill: #6f42c1; font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-weight: 700; }
     @media (prefers-color-scheme: dark) {
-      .fill  { fill: #171126; }
-      .ga    { stop-color: #f0a63a; } .gv { stop-color: #a78bfa; }
-      .label { fill: #ece7f4; }
-      .glyph { fill: #171126; }
-      .icon  { fill: #a78bfa; }
-      .line  { stroke: #a78bfa; }
-      .sh    { stop-color: #ffffff; }
-      .sheen { opacity: 0.12; }
+      .s0 { stop-color: #1c2128; } .s1 { stop-color: #161b22; }
+      .edge { stroke: #3d444d; }
+      .label { fill: #e6edf3; }
+      .ic { stroke: #b197fc; } .gl { fill: #b197fc; }
     }
-    @keyframes sweep { 0% { transform: translateX(-170px) skewX(-20deg); } 40% { transform: translateX(170px) skewX(-20deg); } 100% { transform: translateX(170px) skewX(-20deg); } }
-    @media (prefers-reduced-motion: reduce) { .sheen { display: none; } }
   </style>
-  <rect class="fill" x="1" y="1" width="148" height="42" rx="21"/>
-  <g clip-path="url(#pill)"><rect class="sheen" x="40" y="-10" width="70" height="64" fill="url(#sheen)"/></g>
-  <rect x="1" y="1" width="148" height="42" rx="21" fill="none" stroke="url(#edge)" stroke-width="1.25"/>
-  <circle class="line" cx="44.5" cy="22" r="7.25"/>
-  <ellipse class="line" cx="44.5" cy="22" rx="3" ry="7.25"/>
-  <path class="line" d="M37.25 22 H51.75 M38.1 18.4 H50.9 M38.1 25.6 H50.9"/>
-  <text class="label" x="61.5" y="26.6">Website</text>
+  <rect x="0.5" y="0.5" width="101" height="35" rx="9" fill="url(#surf)" class="edge" stroke-width="1"/>
+  <rect x="1.5" y="1.5" width="99" height="33" rx="8" fill="none" class="inner" stroke-opacity="0.35" stroke-width="1"/>
+  <circle class="ic" cx="22" cy="18" r="7"/>
+  <ellipse class="ic" cx="22" cy="18" rx="3" ry="7"/>
+  <path class="ic" d="M15 18 H29 M15.8 14.6 H28.2 M15.8 21.4 H28.2"/>
+  <text class="label" x="38" y="22.5">Website</text>
 </svg>

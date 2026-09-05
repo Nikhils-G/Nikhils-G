@@ -20,10 +20,10 @@ Always happy to talk voice AI, agents, or fine-tuning.
 
 <div align="center">
 
-<a href="https://www.linkedin.com/in/nikhilsukthe"><img src="assets/btn-linkedin.svg" height="44" alt="LinkedIn"></a>&nbsp;
-<a href="https://medium.com/@sukthenikhil"><img src="assets/btn-medium.svg" height="44" alt="Medium"></a>&nbsp;
-<a href="mailto:sukthenikhil@gmail.com"><img src="assets/btn-email.svg" height="44" alt="Email"></a>&nbsp;
-<a href="https://nikhilsukthe.vercel.app/"><img src="assets/btn-website.svg" height="44" alt="Website"></a>&nbsp;
-<a href="https://orcid.org/0009-0009-8318-1049"><img src="assets/btn-orcid.svg" height="44" alt="ORCID"></a>
+<a href="https://www.linkedin.com/in/nikhilsukthe"><img src="assets/btn-linkedin.svg" height="36" alt="LinkedIn"></a>&nbsp;
+<a href="https://medium.com/@sukthenikhil"><img src="assets/btn-medium.svg" height="36" alt="Medium"></a>&nbsp;
+<a href="mailto:sukthenikhil@gmail.com"><img src="assets/btn-email.svg" height="36" alt="Email"></a>&nbsp;
+<a href="https://nikhilsukthe.vercel.app/"><img src="assets/btn-website.svg" height="36" alt="Website"></a>&nbsp;
+<a href="https://orcid.org/0009-0009-8318-1049"><img src="assets/btn-orcid.svg" height="36" alt="ORCID"></a>
 
 </div>
