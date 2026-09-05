@@ -1,2 +1,5 @@
 # Personal documents — never commit (resume contains phone number)
 *.pdf
+
+# Python caches from the build scripts
+__pycache__/

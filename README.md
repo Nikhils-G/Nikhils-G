@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/intro.svg" width="800" alt="Nikhil Sukthe, Founding AI Engineer at Fika.ai, Hyderabad. I build AI agents, and the models behind them. Voice agents that take live phone calls. WhatsApp agents that take payments without leaving the chat. When turn detection wasn't good enough, I trained my own. A collections agent lifting recovery by around 50%. A dialer placing 30,000 calls a day. Available today, for voice AI, agents, and fine-tuning.">
+<img src="assets/intro.svg" width="800" alt="Nikhil Sukthe, Founding AI Engineer at Fika.ai, Hyderabad. I build AI agents and the models behind them, end to end: from training and fine-tuning to production. When turn detection wasn't good enough, I trained my own: TurnWave, a 7M-parameter transformer, from scratch in PyTorch. Fine-tuned Qwen2.5-7B with QLoRA and served it on vLLM. Built a 200k-pair dataset that beat the baseline, F1 0.798 vs 0.753. Real-time voice agents on LiveKit, STT to LLM to TTS, in Hindi and Telugu, on live phone calls. A collections agent lifting recovery by around 50%. A dialer placing 30,000 calls a day. WhatsApp agents that take payments without leaving the chat. Available today, for voice AI, agents, and fine-tuning.">
 
 </div>
 
@@ -20,6 +20,10 @@ Always happy to talk voice AI, agents, or fine-tuning.
 
 <div align="center">
 
-[LinkedIn](https://www.linkedin.com/in/nikhilsukthe) · [Email](mailto:sukthenikhil@gmail.com) · [Website](https://nikhilsukthe.vercel.app/) · [ORCID](https://orcid.org/0009-0009-8318-1049)
+<a href="https://www.linkedin.com/in/nikhilsukthe"><img src="assets/btn-linkedin.svg" height="44" alt="LinkedIn"></a>&nbsp;
+<a href="https://medium.com/@sukthenikhil"><img src="assets/btn-medium.svg" height="44" alt="Medium"></a>&nbsp;
+<a href="mailto:sukthenikhil@gmail.com"><img src="assets/btn-email.svg" height="44" alt="Email"></a>&nbsp;
+<a href="https://nikhilsukthe.vercel.app/"><img src="assets/btn-website.svg" height="44" alt="Website"></a>&nbsp;
+<a href="https://orcid.org/0009-0009-8318-1049"><img src="assets/btn-orcid.svg" height="44" alt="ORCID"></a>
 
 </div>
