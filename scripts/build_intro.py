@@ -7,9 +7,10 @@
 <inputs_dir> holds sky.jpg (build_sky.py) and wordmark.txt (build_wordmark.py).
 
 The film: the lettering badge rises over the sky, a light sweeps the letters,
-night falls to black and a wishing star sweeps through once, leaving golden
-stardust that glints and dissolves; a few motes linger while seven sentences
-play one at a time; then dawn returns and the cover holds. --at shifts every
+night falls to black, a spark at the top bursts into a vortex of golden
+stardust that sweeps once around the sentence and dissolves; a few motes
+linger while seven sentences play one at a time; then dawn returns and the
+cover holds. --at shifts every
 delay so a screenshot shows that exact moment.
 """
 
@@ -27,11 +28,10 @@ FACE, HIGHLIGHT, SHADE, EXTRUDE = "#f4917a", "#ffd8c8", "#d96a52", "#9c3626"
 BAND, TABS, CAPTION_FILL = "#3a2670", "#2a1a52", "#fff3e6"
 CAPTION = "FOUNDING AI ENGINEER · FIKA.AI · HYDERABAD"
 
-# the wishing star's path: in from the lower left, up past the top left, a loop over the top, out at the top right
-TRAIL = [((-20, 380), (70, 330), (30, 160), (140, 120)), ((140, 120), (230, 80), (350, 30), (430, 50)),
-         ((430, 50), (500, 70), (500, 150), (420, 150)), ((420, 150), (340, 150), (330, 60), (410, 40)),
-         ((410, 40), (520, 20), (640, 50), (700, 110))]
-PARTICLES, TRAVEL = 220, 3.4
+# the stardust vortex: the eye of the swirl is the sentence, three tilted strands wind 1.75 turns around it
+VORTEX_CX, VORTEX_CY, VORTEX_RX, VORTEX_RY = 400, 235, 330, 165
+STRANDS = [(0.95, 0.0, -7), (1.03, 0.35, 0), (1.11, 0.7, 7)]   # scale, phase (rad), tilt (deg)
+TURNS, SWEEP, PER_STRAND, SPRAY = 1.75 * math.pi, 2.6, 190, 130
 MOTES = [(250, 70), (560, 60), (700, 150), (90, 250), (740, 300), (170, 120), (640, 380), (330, 400)]
 
 FRAMES = [
@@ -88,70 +88,59 @@ def rounded_star(R, inner=0.48, k_out=0.30, k_in=0.22):
     return " ".join(d) + " Z"
 
 
-def bezier(p0, p1, p2, p3, t):
-    u = 1 - t
-    return (u ** 3 * p0[0] + 3 * u * u * t * p1[0] + 3 * u * t * t * p2[0] + t ** 3 * p3[0],
-            u ** 3 * p0[1] + 3 * u * u * t * p1[1] + 3 * u * t * t * p2[1] + t ** 3 * p3[1])
+def on_strand(scale0, phase, tilt, prog, jitter=0.0):
+    """point on a strand at progress 0..1: an elliptical spiral that wobbles as it widens"""
+    th = -math.pi / 2 + phase + prog * TURNS
+    sc = scale0 + 0.18 * prog + 0.05 * math.sin(prog * 3 * math.pi) + jitter
+    x, y = VORTEX_RX * sc * math.cos(th), VORTEX_RY * sc * math.sin(th)
+    t = math.radians(tilt)
+    return VORTEX_CX + x * math.cos(t) - y * math.sin(t), VORTEX_CY + x * math.sin(t) + y * math.cos(t), math.degrees(th) + tilt
 
 
-def sample_path(segments, n):
-    """n points (x, y, nx, ny) at equal arc length along cubic segments, the polyline and its length"""
-    poly = [bezier(*seg, i / 60) for seg in segments for i in range(60)] + [segments[-1][3]]
-    cum = [0.0]
-    for a, b in zip(poly, poly[1:]):
-        cum.append(cum[-1] + math.hypot(b[0] - a[0], b[1] - a[1]))
-    length, out = cum[-1], []
-    for k in range(n):
-        target, j = length * k / (n - 1), 0
-        while j < len(cum) - 2 and cum[j + 1] < target:
-            j += 1
-        seg = cum[j + 1] - cum[j] or 1
-        f = (target - cum[j]) / seg
-        (ax, ay), (bx, by) = poly[j], poly[j + 1]
-        out.append((ax + (bx - ax) * f, ay + (by - ay) * f, -(by - ay) / seg, (bx - ax) / seg))
-    return out, poly, length
-
-
-def trail_markup(d):
-    """the wishing star, its stardust, the haze band and the vanish burst; d() shifts delays for --at"""
-    rng = random.Random(9)
-    points, poly, length = sample_path(TRAIL, PARTICLES)
-    t0 = FIRST
-    dust = []
-    for i, (x, y, nx, ny) in enumerate(points):
-        s = i / (PARTICLES - 1)
-        spread = 2.5 + 11 * s ** 1.3
-        off, along = rng.gauss(0, spread), rng.uniform(-4, 4)
-        px, py = x + nx * off - ny * along, y + ny * off + nx * along
-        color = rng.choices(["#ffd24a", "#ffe9a0", "#ffb02e", "#fff8e6"], [40, 30, 15, 15])[0]
-        style = (f'style="animation-delay:{d(t0 + s * TRAVEL + rng.uniform(-0.12, 0.12))};'
-                 f'animation-duration:{1.1 + rng.uniform(0, 0.7):.2f}s"')
-        if rng.random() < 0.09:
-            dust.append(f'<g transform="translate({px:.1f} {py:.1f})"><path class="dust" d="{sparkle_path(rng.uniform(2.6, 4.6))}" fill="{color}" {style}/></g>')
-        else:
-            r = rng.choices([0.7, 1.0, 1.4, 2.0, 2.8], [30, 30, 20, 12, 8])[0]
-            glow = f'<circle r="{r * 3:.1f}" fill="url(#pg)"/>' if r >= 2.0 else ""
-            dust.append(f'<g transform="translate({px:.1f} {py:.1f})"><g class="dust" {style}>{glow}<circle r="{r}" fill="{color}"/></g></g>')
-    ex, ey = points[-1][0], points[-1][1]
-    burst = "".join(
-        f'<g transform="translate({ex:.1f} {ey:.1f}) rotate({k * 30 + rng.uniform(-10, 10):.0f})">'
-        f'<circle class="burst" r="{rng.choice([1, 1.4, 2])}" fill="#ffe08a" style="animation-delay:{d(t0 + TRAVEL)}"/></g>'
-        for k in range(12))
-    stops = " ".join(
-        f"{k / 24 * 100:.1f}% {{ transform: translate({points[round(k / 24 * (PARTICLES - 1))][0]:.1f}px, "
-        f"{points[round(k / 24 * (PARTICLES - 1))][1]:.1f}px) rotate({k * 15}deg); }}" for k in range(25))
-    band = 0.32 * length
-    haze_dur = TRAVEL * (length + band) / length
-    haze_path = "M" + " ".join(f"{p[0]:.1f},{p[1]:.1f}" for p in poly[::3])
+def vortex_markup(d):
+    """spark, strands of glinting dust, soft glow ribbons, big glints and a diffuse spray; d() shifts delays for --at"""
+    rng = random.Random(21)
+    t0 = FIRST + 0.2
+    dust, haze, glints = [], [], []
+    for scale0, phase, tilt in STRANDS:
+        for i in range(PER_STRAND):
+            prog = min(1.0, max(0.0, i / (PER_STRAND - 1) + rng.uniform(-0.01, 0.01)))
+            x, y, ang = on_strand(scale0, phase, tilt, prog, rng.gauss(0, 0.018 + 0.03 * prog))
+            col = rng.choices(["#ffd24a", "#ffe9a0", "#ffb02e", "#fff8e6"], [40, 30, 15, 15])[0]
+            r = rng.choices([0.6, 0.9, 1.3, 1.8, 2.5], [28, 30, 22, 12, 8])[0]
+            style = f'style="animation-delay:{d(t0 + prog * SWEEP + rng.uniform(-0.2, 0.2))};animation-duration:{1.5 + rng.uniform(0, 1.4):.2f}s"'
+            if rng.random() < 0.07:
+                dust.append(f'<g transform="translate({x:.1f} {y:.1f}) rotate({ang:.0f})"><path class="dust" d="{sparkle_path(rng.uniform(2.4, 4.4))}" fill="{col}" {style}/></g>')
+            else:
+                glow = f'<circle r="{r * 3.2:.1f}" fill="url(#pg)"/>' if r >= 1.8 else ""
+                dust.append(f'<g transform="translate({x:.1f} {y:.1f}) rotate({ang:.0f})"><g class="dust" {style}>{glow}<circle r="{r}" fill="{col}"/></g></g>')
+        for seg in range(9):                       # glow ribbon in overlapping segments, so no seams
+            pts = [on_strand(scale0, phase, tilt, min(1.0, max(0.0, (seg - 0.4 + k / 6 * 1.8) / 9)))[:2] for k in range(7)]
+            haze.append(f'<polyline class="haze" points="{" ".join(f"{x:.0f},{y:.0f}" for x, y in pts)}" style="animation-delay:{d(t0 + seg / 9 * SWEEP)}"/>')
+        for _ in range(4):
+            prog = rng.uniform(0.08, 0.96)
+            x, y, _a = on_strand(scale0, phase, tilt, prog, rng.gauss(0, 0.02))
+            glints.append(f'<g transform="translate({x:.1f} {y:.1f})"><g class="glint" style="animation-delay:{d(t0 + prog * SWEEP)}">'
+                          f'<circle r="{rng.uniform(14, 22):.0f}" fill="url(#pg)"/><path d="{sparkle_path(rng.uniform(6, 11))}" fill="#fff1c0"/></g></g>')
+    for _ in range(SPRAY):                          # faint diffuse dust between the strands
+        scale0, phase, tilt = rng.choice(STRANDS)
+        prog = rng.random()
+        x, y, ang = on_strand(scale0, phase, tilt, prog, rng.gauss(0, 0.09))
+        if abs(x - VORTEX_CX) < 300 and abs(y - VORTEX_CY) < 55:
+            continue                                # never over the sentence
+        style = f'style="animation-delay:{d(t0 + prog * SWEEP + rng.uniform(-0.3, 0.3))};animation-duration:{2 + rng.uniform(0, 1.6):.2f}s"'
+        dust.append(f'<g transform="translate({x:.1f} {y:.1f}) rotate({ang:.0f})"><circle class="dust" r="{rng.choice([0.5, 0.7, 0.9])}" fill="#ffe9a0" opacity="0.7" {style}/></g>')
+    sx, sy = VORTEX_CX, VORTEX_CY - VORTEX_RY * 0.95
     star = rounded_star(20)
-    markup = (f'<path class="haze" d="{haze_path}" fill="none" stroke="#ffcf5a" stroke-width="18" stroke-linecap="round" opacity="0.28" filter="url(#haze)"/>\n'
-              f'      {"".join(dust)}\n      {burst}\n'
-              f'      <g class="head"><g transform="scale(0.42)"><circle r="46" fill="url(#hg)"/><path d="{star}" fill="url(#starfill)"/>'
+    markup = (f'<g class="vortex">{"".join(haze)}{"".join(dust)}{"".join(glints)}</g>\n'
+              f'      <g transform="translate({sx} {sy:.0f})"><circle class="ring" r="130" fill="none" stroke="#ffd98a" stroke-width="2"/>'
+              f'<g class="spark"><circle r="60" fill="url(#hg)"/><path d="{star}" fill="url(#starfill)"/>'
               f'<path d="{star}" fill="#fff" opacity="0.5" transform="translate(-2 -2) scale(0.55)"/></g></g>')
-    css = (f"    .haze {{ stroke-dasharray: {band:.0f} {length:.0f}; stroke-dashoffset: {band:.0f}; animation: haze {haze_dur:.2f}s linear {d(t0)} forwards; }}\n"
-           f"    .head {{ opacity: 0; animation: head {TRAVEL}s linear {d(t0)} forwards, headfade {TRAVEL}s linear {d(t0)} forwards; }}\n"
-           f"    @keyframes haze {{ to {{ stroke-dashoffset: {-length:.0f}; }} }}\n"
-           f"    @keyframes head {{ {stops} }}")
+    css = (f"    .vortex {{ transform-origin: {VORTEX_CX}px {VORTEX_CY}px; animation: turn 7s ease-in-out {d(t0 - 0.4)} forwards; }}\n"
+           f"    .haze  {{ fill: none; stroke: #ffcf5a; stroke-width: 24; stroke-linecap: round; stroke-linejoin: round; opacity: 0; filter: url(#haze); animation: haze 2.6s ease-in-out forwards; }}\n"
+           f"    .glint {{ opacity: 0; transform-box: fill-box; transform-origin: center; animation: glint 2.2s ease-out forwards; }}\n"
+           f"    .spark {{ opacity: 0; transform-box: fill-box; transform-origin: center; animation: spark 1.1s ease-out {d(t0 - 0.5)} forwards; }}\n"
+           f"    .ring  {{ opacity: 0; transform-box: fill-box; transform-origin: center; animation: ring 1.3s ease-out {d(t0 - 0.4)} forwards; }}")
     return markup, css
 
 
@@ -204,7 +193,7 @@ def build(inputs, at=0.0):
     d = lambda t: f"{t - at:.2f}s"
     delays = "\n".join(f"    .f{i} {{ animation-delay: {d(FIRST + FRAME * (i - 1))}; }}" for i in range(1, len(FRAMES) + 1))
     night_in, night_out = 0.8 / NIGHT_LEN * 100, (NIGHT_LEN - 1.0) / NIGHT_LEN * 100
-    trail, trail_css = trail_markup(d)
+    trail, trail_css = vortex_markup(d)
     motes, motes_css = motes_markup(d)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="{esc(ARIA)}">
   <!-- Built by scripts/build_intro.py from scripts/build_sky.py and scripts/build_wordmark.py. Lettering: Anton (SIL Open Font License 1.1) as outlines. -->
@@ -217,10 +206,10 @@ def build(inputs, at=0.0):
     <clipPath id="wm-clip">{w1}{w2_shifted}</clipPath>
     <linearGradient id="sweep-grad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff0dd" stop-opacity="0"/><stop offset="0.5" stop-color="#fff0dd" stop-opacity="1"/><stop offset="1" stop-color="#fff0dd" stop-opacity="0"/></linearGradient>
     <radialGradient id="pg"><stop offset="0" stop-color="#ffd24a" stop-opacity="0.6"/><stop offset="1" stop-color="#ffd24a" stop-opacity="0"/></radialGradient>
-    <radialGradient id="hg"><stop offset="0" stop-color="#ffe08a" stop-opacity="0.8"/><stop offset="1" stop-color="#ffe08a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="hg"><stop offset="0" stop-color="#fff0b0" stop-opacity="0.9"/><stop offset="1" stop-color="#ffd24a" stop-opacity="0"/></radialGradient>
     <linearGradient id="starfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe36a"/><stop offset="1" stop-color="#f6ad1c"/></linearGradient>
     <filter id="lift" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#2a1d4a" flood-opacity="0.3"/></filter>
-    <filter id="haze" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter>
+    <filter id="haze" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter>
   </defs>
   <style>
     .cap {{ font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 12.5px; letter-spacing: 2.5px; fill: {CAPTION_FILL}; }}
@@ -231,7 +220,6 @@ def build(inputs, at=0.0):
     .sweep {{ opacity: 0.8; transform: translateX(0) skewX(-18deg); animation: sweep 1.2s ease-in-out {d(SWEEP_AT)} forwards; }}
     .night {{ opacity: 0; animation: night {NIGHT_LEN:.1f}s linear {d(NIGHT_AT)} forwards; }}
     .dust  {{ opacity: 0; transform-box: fill-box; transform-origin: center; animation-name: dust; animation-timing-function: ease-out; animation-fill-mode: forwards; }}
-    .burst {{ opacity: 0; animation: burst 1.1s ease-out forwards; }}
     .mote  {{ opacity: 0; transform-box: fill-box; transform-origin: center; animation-name: motein, motepulse, motedrift; animation-timing-function: ease-out, ease-in-out, linear; animation-iteration-count: 1, infinite, 1; animation-direction: normal, alternate, normal; animation-fill-mode: forwards, none, forwards; }}
 {motes_css}
 {trail_css}
@@ -243,9 +231,12 @@ def build(inputs, at=0.0):
     @keyframes sweep   {{ to {{ transform: translateX(600px) skewX(-18deg); }} }}
     @keyframes hide    {{ 0% {{ opacity: 1; }} {night_in:.2f}% {{ opacity: 0; }} {night_out:.2f}% {{ opacity: 0; }} 100% {{ opacity: 1; }} }}
     @keyframes night   {{ 0% {{ opacity: 0; }} {night_in:.2f}% {{ opacity: 1; }} {night_out:.2f}% {{ opacity: 1; }} 100% {{ opacity: 0; }} }}
-    @keyframes dust    {{ 0% {{ opacity: 0; transform: scale(0.2); }} 30% {{ opacity: 1; transform: scale(1); }} 100% {{ opacity: 0; transform: translateY(-9px) scale(0.5); }} }}
-    @keyframes burst   {{ 0% {{ opacity: 1; transform: translateX(0); }} 100% {{ opacity: 0; transform: translateX(22px); }} }}
-    @keyframes headfade {{ 0% {{ opacity: 0; }} 6% {{ opacity: 1; }} 88% {{ opacity: 1; }} 100% {{ opacity: 0; }} }}
+    @keyframes turn    {{ from {{ transform: rotate(0deg); }} to {{ transform: rotate(7deg); }} }}
+    @keyframes dust    {{ 0% {{ opacity: 0; transform: translateX(0) scale(0.2); }} 25% {{ opacity: 1; transform: translateX(3px) scale(1); }} 100% {{ opacity: 0; transform: translateX(14px) scale(0.4); }} }}
+    @keyframes haze    {{ 0% {{ opacity: 0; }} 35% {{ opacity: 0.16; }} 100% {{ opacity: 0; }} }}
+    @keyframes glint   {{ 0% {{ opacity: 0; transform: scale(0) rotate(0deg); }} 30% {{ opacity: 1; transform: scale(1.15) rotate(40deg); }} 60% {{ opacity: 0.9; transform: scale(0.9) rotate(70deg); }} 100% {{ opacity: 0; transform: scale(0.3) rotate(110deg); }} }}
+    @keyframes spark   {{ 0% {{ opacity: 0; transform: scale(0.2) rotate(0deg); }} 40% {{ opacity: 1; transform: scale(1.4) rotate(60deg); }} 100% {{ opacity: 0; transform: scale(0.6) rotate(120deg); }} }}
+    @keyframes ring    {{ 0% {{ opacity: 0.7; transform: scale(0.1); }} 100% {{ opacity: 0; transform: scale(1); }} }}
     @keyframes motein  {{ to {{ opacity: 0.55; }} }}
     @keyframes motepulse {{ from {{ opacity: 0.35; }} to {{ opacity: 0.8; }} }}
     @keyframes motedrift {{ to {{ transform: translateY(-10px); }} }}
@@ -260,7 +251,7 @@ def build(inputs, at=0.0):
   <g clip-path="url(#frame)">
     <image class="sky" width="{W}" height="{H}" preserveAspectRatio="xMidYMid slice" href="{data_uri(inputs / 'sky.jpg', 'image/jpeg')}"/>
 
-    <!-- night: black; a wishing star sweeps through once, its dust lingers as motes -->
+    <!-- night: black; a spark bursts into a stardust vortex around the sentence, its dust lingers as motes -->
     <g class="night">
       <rect width="{W}" height="{H}" fill="#000"/>
       {trail}
