@@ -3,11 +3,13 @@
 
     PYTHONPATH=<dir with fontTools> python3 scripts/build_wordmark.py Anton-Regular.ttf > wordmark.txt
 
-Prints a <g id="wordmark"> of <path>s, one per glyph. Each path carries its own
-transform placing it on an arc (centre letters higher, ends lower) so the word
-can be extruded with <use> copies. Positions use the font's advances and GPOS
-pair kerning; the word is scaled to WIDTH px and centred on x=0, baseline y=0.
-Anton is licensed under the SIL Open Font License; outlines may be embedded.
+Prints two groups, <g id="w1"> for NIKHIL and <g id="w2"> for SUKTHE, each a
+set of <path>s, one per glyph, carrying its own transform that places it on an
+upward arc (centre letters higher, ends lower). Each line is centred on x=0
+with its baseline at y=0, so the assembler can stack and extrude them with
+<use> copies. Positions use the font's advances, GPOS pair kerning and a
+slightly tight tracking. Anton is licensed under the SIL Open Font License;
+outlines may be embedded.
 """
 
 import math
@@ -16,9 +18,10 @@ from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
 
-TEXT = "Nikhil Sukthe"
-WIDTH = 560      # px, whole word
-ARC_R = 1500     # px, radius of the baseline arc
+LINES = (("w1", "NIKHIL"), ("w2", "SUKTHE"))
+SIZE = 140          # px font size
+TRACKING = -0.02    # em, letters sit a little tighter than the font's default
+ARC_R = 1200        # px, radius of the baseline arc
 
 
 def pair_kern(font, left, right):
@@ -48,25 +51,27 @@ def pair_kern(font, left, right):
 def main(path):
     font = TTFont(path)
     cmap, glyphs, hmtx = font.getBestCmap(), font.getGlyphSet(), font["hmtx"]
-    names = [cmap[ord(c)] for c in TEXT]
-    units = [hmtx[n][0] + (pair_kern(font, n, names[i + 1]) if i + 1 < len(names) else 0)
-             for i, n in enumerate(names)]
-    scale = WIDTH / sum(units)
-    widths = [u * scale for u in units]
-
+    scale = SIZE / font["head"].unitsPerEm
     fmt = lambda v: ("%.1f" % v).rstrip("0").rstrip(".")
-    print(f'<g id="wordmark"><!-- {TEXT}, Anton, {WIDTH}px wide on a {ARC_R}px arc -->')
-    x = -WIDTH / 2
-    for name, w in zip(names, widths):
-        angle = (x + w / 2) / ARC_R
-        pen = SVGPathPen(glyphs, ntos=fmt)
-        glyphs[name].draw(TransformPen(pen, (scale, 0, 0, -scale, -w / 2, 0)))
-        d = pen.getCommands()
-        if d:
-            print(f'  <path transform="translate({ARC_R * math.sin(angle):.1f} {ARC_R * (1 - math.cos(angle)):.1f}) '
-                  f'rotate({math.degrees(angle):.2f})" d="{d}"/>')
-        x += w
-    print("</g>")
+
+    for gid, text in LINES:
+        names = [cmap[ord(c)] for c in text]
+        own = [hmtx[n][0] * scale for n in names]                       # each glyph's own advance
+        step = [w + (pair_kern(font, n, names[i + 1]) * scale if i + 1 < len(names) else 0) + TRACKING * SIZE
+                for i, (n, w) in enumerate(zip(names, own))]           # distance to the next glyph
+        total = sum(step) - TRACKING * SIZE
+        print(f'<g id="{gid}"><!-- {text}, Anton {SIZE}px, {total:.0f}px wide on a {ARC_R}px arc -->')
+        x = -total / 2
+        for name, w, adv in zip(names, own, step):
+            angle = (x + w / 2) / ARC_R
+            pen = SVGPathPen(glyphs, ntos=fmt)
+            glyphs[name].draw(TransformPen(pen, (scale, 0, 0, -scale, -w / 2, 0)))
+            d = pen.getCommands()
+            if d:
+                print(f'  <path transform="translate({ARC_R * math.sin(angle):.1f} {ARC_R * (1 - math.cos(angle)):.1f}) '
+                      f'rotate({math.degrees(angle):.2f})" d="{d}"/>')
+            x += adv
+        print("</g>")
 
 
 if __name__ == "__main__":
