@@ -1,48 +1,25 @@
 <div align="center">
 
-<img src="assets/header.svg" width="800" alt="nikhil@ai-agents:~$ whoami — Nikhil Sukthe, AI Engineer, building agents that automate business across voice, WhatsApp, chat and email">
+<img src="assets/intro.svg" width="800" alt="Nikhil Sukthe, Founding AI Engineer at Fika.ai, Hyderabad. I build AI agents, and the models behind them. Voice agents that take live phone calls. WhatsApp agents that take payments without leaving the chat. When turn detection wasn't good enough, I trained my own. A collections agent lifting recovery by around 50%. A dialer placing 30,000 calls a day. Available today, for voice AI, agents, and fine-tuning.">
 
 </div>
 
-**I build AI agents that businesses pay for** — voice agents that make and take phone calls, WhatsApp agents that sell (catalog to Razorpay payment without leaving the chat), and the chat and email automation around them. Founding AI Engineer at [Fika.ai](https://powersmy.biz), Hyderabad. The metric is never the demo. It's collection rates, bookings, and milliseconds.
+I build AI agents and the models behind them, end to end: from training and fine-tuning to production systems.
 
-### What production taught me
+At [Fika.ai](https://powersmy.biz), I work on real-time voice pipelines on LiveKit (SIP + WebRTC): STT to LLM to TTS, Gemini Live speech-to-speech, Sarvam and Cartesia for Hindi and Telugu, and Silero VAD for speech detection. Turn detection pulled me in deep enough that I built my own model for it: [TurnWave](https://github.com/Nikhils-G/turnwave), a 7M-parameter transformer trained from scratch in PyTorch that beat the baseline I measured it against.
 
-**Latency is the product.** Past about 800 ms, callers notice the lag. My WhatsApp Voice Bridge (WhatsApp Desktop → WASAPI → LiveKit → Gemini Live) holds two-way audio at **300–800 ms** round-trip, with zero SIP cost.
+On the ML side I work with PyTorch, TensorFlow, and Hugging Face Transformers. I've fine-tuned Qwen2.5-7B with QLoRA and served it on vLLM, worked hands-on with quantization, and engineered a 200k-pair dataset where I beat the cue-word baseline (F1 0.798 vs 0.753). I've gone through the transformer architecture from the ground up, implementing attention, RoPE, and a BPE tokenizer myself.
 
-**A silent agent is the worst bug.** In LiveKit's Sarvam STT plugin, agent responses longer than ~10 s cancelled the task while audio was still buffered — transcripts vanished and the agent went mute mid-call. I found it on live calls and fixed it upstream: [livekit/agents #4798](https://github.com/livekit/agents/pull/4798) *(PR open)*.
+Some of what I've shipped is running at real scale today: a collections agent that lifted recovery by around 50%, a dialer placing about 30,000 calls a day, a WhatsApp commerce agent that takes Razorpay payments without leaving the chat, and LangGraph + RAG agents serving live customer traffic.
 
-**Same brain, different mouth.** Phone, WhatsApp, chat and email run on one agent runtime — LiveKit and SIP for voice, LangGraph with RAG and MCP for reasoning, FastAPI, Redis and Postgres underneath, Langfuse so the numbers are measured, not guessed.
+My backend is FastAPI, WebSockets, async Python, MongoDB, Redis, and Postgres, with Grafana, Prometheus, Loki, and Langfuse watching everything in production. I recently started contributing to open source and fixed a race condition in LiveKit's Sarvam STT plugin that was silently dropping transcripts ([livekit/agents #4798](https://github.com/livekit/agents/pull/4798)).
 
-**One concept at a time.** [ai-experiments-lab](https://github.com/Nikhils-G/ai-experiments-lab): 17 notebooks, each a single idea worked end to end — autoencoders, LSTMs, CNNs on Fashion-MNIST, GPT-2 generation, K-Means, PCA, cross-validated model tuning — and LoRA/QLoRA fine-tuning in the runtime's LLM core.
+I reach for TypeScript and React when a dashboard is needed, SQL everywhere, and I'm currently learning Go because LiveKit's server is written in it.
 
-### Work
-
-| | |
-|---|---|
-| **NBFC collections voice agent** | Production collections calls at Fika.ai — **collection rate up 50%** |
-| **LiveKit SIP Manager** | Trunks, dispatch rules, IP whitelisting, dialer — the whole SIP ops surface, **zero CLI** |
-| **LangGraph + RAG assistant** | **Sub-5 s** end to end, **15%** engagement uplift |
-| **Now** | Multi-channel agents for healthcare, fintech and real-estate clients · live voice ops — SIP trunks, STT/TTS A/B tests, per-call cost & latency telemetry · exploring speech-to-speech, predictive dialers, MCP tool servers |
-
-### One runtime, every channel
-
-<img src="assets/stack.svg" width="800" alt="Nikhil's stack drawn as a circuit board: Phone/SIP, WhatsApp and Chat/Email inputs flow into an Agent Runtime chip (LiveKit, WebRTC, SIP, STT and TTS, Gemini Live, Sarvam) wired to an LLM Core chip (LangGraph, MCP, RAG, LoRA/QLoRA), mounted on an infra bus of FastAPI/WebSockets, MongoDB/Redis/Postgres, Docker/Kubernetes, AWS/GCP Vertex, Langfuse, and vector databases">
-
-### Live stats
-
-<img src="assets/fetch-card.svg" width="820" alt="Neofetch-style card with live GitHub stats for Nikhils-G">
-
----
+Always happy to talk voice AI, agents, or fine-tuning.
 
 <div align="center">
 
-[Website](https://nikhilsukthe.vercel.app/) · [LinkedIn](https://www.linkedin.com/in/nikhilsukthe) · [Email](mailto:sukthenikhil@gmail.com) · [ORCID](https://orcid.org/0009-0009-8318-1049)
-
-<sub>This profile updates itself — a daily [GitHub Action](.github/workflows/profile.yml) runs [one Python script](scripts/update_profile.py) that regenerates the stats card. <!-- UPDATED:START -->
-Last refreshed: 2026-08-25 (UTC).
-<!-- UPDATED:END --></sub>
-
-<img src="https://github.com/Nikhils-G/Nikhils-G/actions/workflows/profile.yml/badge.svg" alt="profile refresh status">
+[LinkedIn](https://www.linkedin.com/in/nikhilsukthe) · [Email](mailto:sukthenikhil@gmail.com) · [Website](https://nikhilsukthe.vercel.app/) · [ORCID](https://orcid.org/0009-0009-8318-1049)
 
 </div>

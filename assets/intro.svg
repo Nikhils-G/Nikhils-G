@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img" aria-label="Nikhil Sukthe, Founding AI Engineer at Fika.ai, Hyderabad. I build AI agents, and the models behind them. Voice agents that take live phone calls. WhatsApp agents that take payments without leaving the chat. When turn detection wasn't good enough, I trained my own. A collections agent lifting recovery by around 50%. A dialer placing 30,000 calls a day. Available today, for voice AI, agents, and fine-tuning.">
+  <defs>
+    <clipPath id="frame"><rect width="800" height="450" rx="12"/></clipPath>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6f7fc4"/>
+      <stop offset="0.5" stop-color="#b8a6d6"/>
+      <stop offset="1" stop-color="#f5c99b"/>
+    </linearGradient>
+    <filter id="blur14" x="-40%" y="-90%" width="180%" height="280%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="blur22" x="-40%" y="-90%" width="180%" height="280%"><feGaussianBlur stdDeviation="22"/></filter>
+    <filter id="blur28" x="-40%" y="-90%" width="180%" height="280%"><feGaussianBlur stdDeviation="28"/></filter>
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+    <filter id="shadow" x="-10%" y="-40%" width="120%" height="180%"><feDropShadow dx="0" dy="1.5" stdDeviation="4" flood-color="#2a1d4a" flood-opacity="0.45"/></filter>
+  </defs>
+  <style>
+    .name { font-family: ui-serif, Georgia, "Iowan Old Style", "Times New Roman", Times, serif; font-size: 56px; fill: #ffffff; }
+    .cap  { font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 12.5px; letter-spacing: 2.5px; fill: #ffffff; }
+    .s    { font-family: ui-sans-serif, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 22px; fill: #ffffff; }
+
+    /* cover: the name rises in, the caption follows */
+    .name { opacity: 0; transform: translateY(8px); animation: rise 1.4s ease-out 0s forwards; }
+    .cap  { opacity: 0; animation: fade 0.8s ease-out 1.2s forwards; }
+
+    /* film body: the sky dims at 3.2s, six sentences play one at a time, the sky returns at 18.4s */
+    .dark { opacity: 0; animation: dark 16.2s linear 3.2s forwards; }
+    .s    { opacity: 0; animation: say 2.4s ease-in-out forwards; }
+    .s1 { animation-delay: 4.0s; }
+    .s2 { animation-delay: 6.4s; }
+    .s3 { animation-delay: 8.8s; }
+    .s4 { animation-delay: 11.2s; }
+    .s5 { animation-delay: 13.6s; }
+    .s6 { animation-delay: 16.0s; }
+
+    /* the thin clouds drift, very slowly */
+    .c3 { animation: drift-a 120s ease-in-out infinite alternate; }
+    .c4 { animation: drift-b 140s ease-in-out infinite alternate; }
+    .c5 { animation: drift-b 100s ease-in-out infinite alternate-reverse; }
+    .c7 { animation: drift-a 90s  ease-in-out infinite alternate-reverse; }
+
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade { to { opacity: 0.85; } }
+    @keyframes dark { 0% { opacity: 0; } 4.9% { opacity: 1; } 93.8% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes say  { 0% { opacity: 0; transform: translateY(4px); } 16.7% { opacity: 1; transform: translateY(0); } 83.3% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(0); } }
+    @keyframes drift-a { from { transform: translateX(-28px); } to { transform: translateX(28px); } }
+    @keyframes drift-b { from { transform: translateX(-16px); } to { transform: translateX(16px); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .name, .cap { animation: none; opacity: 1; transform: none; }
+      .cap { opacity: 0.85; }
+      .dark, .s { display: none; }
+      .c3, .c4, .c5, .c7 { animation: none; }
+    }
+  </style>
+
+  <g clip-path="url(#frame)">
+    <!-- sky -->
+    <rect width="800" height="450" fill="url(#sky)"/>
+
+    <!-- moon -->
+    <circle cx="150" cy="82" r="70" fill="#ffffff" opacity="0.28" filter="url(#glow)"/>
+    <circle cx="150" cy="82" r="38" fill="#f3f1ee" opacity="0.72"/>
+
+    <!-- clouds -->
+    <g class="c c1" fill="#fbe3cf" opacity="0.85" filter="url(#blur22)"><ellipse cx="120" cy="362" rx="220" ry="58"/><ellipse cx="262" cy="330" rx="150" ry="52"/></g>
+    <g class="c c2" fill="#f9d5b8" opacity="0.8"  filter="url(#blur22)"><ellipse cx="640" cy="300" rx="200" ry="48"/><ellipse cx="720" cy="268" rx="120" ry="44"/></g>
+    <g class="c c3" fill="#ffffff" opacity="0.55" filter="url(#blur14)"><ellipse cx="620" cy="92"  rx="170" ry="26"/></g>
+    <g class="c c4" fill="#fbe3cf" opacity="0.5"  filter="url(#blur14)"><ellipse cx="310" cy="140" rx="140" ry="22"/></g>
+    <g class="c c5" fill="#ffffff" opacity="0.6"  filter="url(#blur28)"><ellipse cx="60"  cy="250" rx="120" ry="40"/></g>
+    <g class="c c6" fill="#f9d5b8" opacity="0.9"  filter="url(#blur28)"><ellipse cx="430" cy="425" rx="270" ry="70"/></g>
+    <g class="c c7" fill="#ffffff" opacity="0.35" filter="url(#blur14)"><ellipse cx="420" cy="172" rx="110" ry="18"/></g>
+
+    <!-- film grain -->
+    <rect width="800" height="450" filter="url(#grain)" opacity="0.07"/>
+
+    <!-- cover -->
+    <text class="name" x="400" y="226" text-anchor="middle" filter="url(#shadow)">Nikhil Sukthe</text>
+    <text class="cap"  x="400" y="262" text-anchor="middle" filter="url(#shadow)">FOUNDING AI ENGINEER · FIKA.AI · HYDERABAD</text>
+
+    <!-- film body -->
+    <rect class="dark" width="800" height="450" fill="#0f0a1a"/>
+    <text class="s s1" x="400" y="232" text-anchor="middle">I build AI agents, and the models behind them.</text>
+    <text class="s s2" x="400" y="232" text-anchor="middle">Voice agents that take live phone calls.</text>
+    <text class="s s3" x="400" y="232" text-anchor="middle">WhatsApp agents that take payments without leaving the chat.</text>
+    <text class="s s4" x="400" y="232" text-anchor="middle">When turn detection wasn't good enough, I trained my own.</text>
+    <text class="s s5" x="400" y="216" text-anchor="middle"><tspan x="400">A collections agent lifting recovery by around 50%.</tspan><tspan x="400" dy="32">A dialer placing 30,000 calls a day.</tspan></text>
+    <text class="s s6" x="400" y="232" text-anchor="middle">Available today, for voice AI, agents, and fine-tuning.</text>
+  </g>
+</svg>
